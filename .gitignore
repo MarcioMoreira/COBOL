@@ -1,7 +1,17 @@
-# Ignorar executáveis e ficheiros de compilação
-*.exe
-*.int
-*.gnt
-*.lst
-*.obj
+# Pasta de binários (executáveis)
 bin/
+obj/
+
+# Ficheiros temporários e de log do GnuCOBOL
+*.lst
+*.lsc
+*.idy
+*.gnt
+*.int
+
+# Ficheiros do Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Configurações de editores (opcional)
+.vscode/
