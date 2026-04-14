@@ -9,6 +9,7 @@ The objective of this project is to practice COBOL intensively, automate batch f
 * **Languages:** COBOL
 * **COBOL Compiler:** GnuCOBOL 3.2.0 (Clang/Apple LLVM)
 * **Editor:** VS Code (with *COBOL Language Support* extension)
+* **Environment:** MacOS
 
 ## 🏗️ How to Compile and Run (COBOL)
 
