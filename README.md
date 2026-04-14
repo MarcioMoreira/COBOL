@@ -1,27 +1,26 @@
-# Projeto COBOL: Estudo de COBOL
+# COBOL Training Project
 
-Este repositório contém o desenvolvimento de exercícios de lógica utilizando a linguagem COBOL.
+This repository contains the development of logic exercises and database routines using COBOL.
 
-## 🚀 Objetivo
-O objetivo deste projeto é Praticar intensamente COBOL / automatizar o processamento de ficheiros batch.
+## 🚀 Objective
+The objective of this project is to practice COBOL intensively, automate batch file processing, procedural logic for insurance systems.
 
-## 🛠️ Ferramentas Utilizadas
-* **Compilador:**  GnuCOBOL 3.2.0 (Clang/Apple LLVM)
-* **Editor:** VS Code (com a extensão *COBOL Language Support*)
-* **Ambiente:** [Windows/Linux/Mainframe/Mac]
+## 🛠️ Tools Used
+* **Languages:** COBOL
+* **COBOL Compiler:** GnuCOBOL 3.2.0 (Clang/Apple LLVM)
+* **Editor:** VS Code (with *COBOL Language Support* extension)
 
-## 🏗️ Como Compilar e Executar
+## 🏗️ How to Compile and Run (COBOL)
 
-Certifique-se de que está na raiz do projeto e que a pasta `bin` existe. Utilize os seguintes comandos:
+Ensure you are in the project root and that the `bin` folder exists. Use the following commands:
 
-**1. Compilar:**
-
+**1. Compile:**
 ```bash
-# Cria a pasta bin se não existir e compila o código da pasta src
-mkdir -p bin && cobc -x -o bin/nome_programa src/seu_arquivo.cob
-```
+# Creates the bin folder if it doesn't exist and compiles the code from the src folder
+mkdir -p bin && cobc -x -o bin/program_name src/your_file.cob
 
-**2. Executar:**
-```bash
-./bin/nome_programa
 ```
+**2. Run:**
+```bash
+# Runs program
+./bin/program_name
