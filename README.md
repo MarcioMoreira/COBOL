@@ -1,6 +1,6 @@
 # COBOL Training Project
 
-This repository contains the development of logic exercises and database routines using COBOL.
+This repository contains the development of logic exercises using COBOL.
 
 ## 🚀 Objective
 The objective of this project is to practice COBOL intensively, automate batch file processing, procedural logic for insurance systems.
