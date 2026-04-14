@@ -1,0 +1,7 @@
+# Ignorar executáveis e ficheiros de compilação
+*.exe
+*.int
+*.gnt
+*.lst
+*.obj
+bin/
