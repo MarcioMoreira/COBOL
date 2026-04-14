@@ -6,7 +6,7 @@ Este repositório contém o desenvolvimento de exercícios de lógica utilizando
 O objetivo deste projeto é Praticar intensamente COBOL / automatizar o processamento de ficheiros batch.
 
 ## 🛠️ Ferramentas Utilizadas
-* **Compilador:** GnuCOBOL (OpenCOBOL) 3.1+
+* **Compilador:**  GnuCOBOL 3.2.0 (Clang/Apple LLVM)
 * **Editor:** VS Code (com a extensão *COBOL Language Support*)
 * **Ambiente:** [Windows/Linux/Mainframe/Mac]
 
