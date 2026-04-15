@@ -1,4 +1,4 @@
-# COBOL Training Project
+# COBOL Training Collection
 
 This repository contains the development of logic exercises using COBOL.
 
