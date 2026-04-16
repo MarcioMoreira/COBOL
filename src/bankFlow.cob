@@ -76,8 +76,7 @@
                    PERFORM VALIDATE-PIN
            END-READ.
 
-           CLOSE FICHEIRO-CLIENTES.
-           STOP RUN.
+           
 
        VALIDATE-PIN.
            DISPLAY "INTRODUZA O PIN: " WITH NO ADVANCING.
@@ -112,11 +111,11 @@
                TO WS-LOG-TIPO-OP
                    EVALUATE WS-LOG-TIPO-OP
                        WHEN "C"
-                          *> PERFORM 2000-TRANSFERIR
+                           PERFORM 2000-CONSULTA
                        WHEN "T"
                           *> PERFORM 3000-TRANSFERIR
                        WHEN "L"
-                          *> PERFORM 4000-LEVANTAR
+                           PERFORM 4000-LEVANTAR
                        WHEN "D"
                           *> PERFORM 5000-DEPOSITAR
                        WHEN "S"
@@ -139,7 +138,50 @@
            END-IF.
 
            
-           
+       2000-CONSULTA.
+           DISPLAY " "
+           DISPLAY "-------------------------------------"
+           DISPLAY " "
+           DISPLAY "---     * CONSULTA DE SALDO *     ---"
+           DISPLAY " "
+           DISPLAY "CLIENTE: " NOME-FILE
+           MOVE SALDO-FILE TO WS-VALOR-FORMATADO
+           DISPLAY "SALDO DISPONIVEL: " WS-VALOR-FORMATADO " EUROS."
+           DISPLAY " "
+           DISPLAY "--- * FIM DE CONSULTA DE SALDO *  ---"
+           DISPLAY " ".
+
+       4000-LEVANTAR.
+           DISPLAY " "
+           DISPLAY "-------------------------------------"
+           DISPLAY " "
+           DISPLAY "---  * OPERACAO : LEVANTAMENTO *  ---"
+           DISPLAY " "
+           DISPLAY "VALOR A LEVANTAR: " WITH NO ADVANCING
+           ACCEPT WS-VALOR-OPERACAO
+
+           IF WS-VALOR-OPERACAO > SALDO-FILE
+               DISPLAY "ERRO: SALDO INSUFICIENTE!"
+           ELSE
+               SUBTRACT WS-VALOR-OPERACAO FROM SALDO-FILE
+               
+               *> REWRITE atualiza a linha no ficheiro INDEXADO
+               REWRITE REG-CLIENTE
+                   INVALID KEY
+                       DISPLAY "ERRO AO ATUALIZAR SALDO NO FICHEIRO!"
+                   NOT INVALID KEY
+                       MOVE SALDO-FILE TO WS-VALOR-FORMATADO
+                       DISPLAY "LEVANTAMENTO EFETUADO COM SUCESSO!"
+                       DISPLAY "NOVO SALDO: " WS-VALOR-FORMATADO " EUR."
+                       DISPLAY " "
+                       DISPLAY "---  *   FIM DE LEVANTAMENTO   *  ---"
+                       DISPLAY " "
+                       DISPLAY "-------------------------------------"
+                       DISPLAY " "
+               END-REWRITE
+           END-IF
+           DISPLAY " ".
+
            
            
            CLOSE FICHEIRO-CLIENTES.
