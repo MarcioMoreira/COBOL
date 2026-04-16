@@ -36,7 +36,9 @@
            05 WS-LOG-ID-OPERACAO   PIC 9(09).
            05 WS-LOG-DATA          PIC 9(08). *> YYYYMMDD
            05 WS-LOG-CONTA         PIC 9(09).
-           05 WS-LOG-TIPO-OP       PIC X(01). *> 'T', 'L', 'D', 'P'
+           *> 'T-Transferir', 'L-Levantamento'
+           *> 'D-Deposito', 'S-Sair', 'C-Consulta'
+           05 WS-LOG-TIPO-OP       PIC X(01). 
            05 WS-LOG-VALOR         PIC 9(07)V99.
 
        01  WS-CLIENTE.
@@ -55,9 +57,12 @@
            END-IF.
 
            DISPLAY " ".
-           DISPLAY "-----------------------------".
-           DISPLAY "*      BANKFLOW SYSTEM      *".
-           DISPLAY "-----------------------------".
+           DISPLAY "                  --                 ".
+           DISPLAY "                ------               ".
+           DISPLAY "        --   ------------  --        ".
+           DISPLAY "-------------------------------------".
+           DISPLAY "*          BANKFLOW SYSTEM          *".
+           DISPLAY "-------------------------------------".
            DISPLAY " ".
            
            DISPLAY "NUMERO DE CONTA: " WITH NO ADVANCING.
@@ -76,17 +81,67 @@
 
        VALIDATE-PIN.
            DISPLAY "INTRODUZA O PIN: " WITH NO ADVANCING.
-           ACCEPT WS-PIN. *> Variavel que armazena o PIN
+           ACCEPT WS-PIN. *> guarda PIN
 
            IF WS-PIN = PIN-FILE
                DISPLAY " "
                DISPLAY "ACESSO CONCEDIDO!"
                DISPLAY "BEM-VINDO, " NOME-FILE
-               DISPLAY "SALDO ATUAL: " SALDO-FILE
+
+               MOVE SALDO-FILE TO WS-VALOR-FORMATADO
+               DISPLAY "SALDO ATUAL: " WS-VALOR-FORMATADO " EUROS."
                DISPLAY " "
-               *> Here you will call your Menu-Paragraph later
+               
+               PERFORM UNTIL WS-LOG-TIPO-OP = "S"
+               DISPLAY "-------------------------------------"
+               DISPLAY "-------------------------------------"
+               DISPLAY "ESCOLHA UMA OPERACAO:"
+               DISPLAY " "
+               DISPLAY "C - CONSULTA"
+               DISPLAY "T - TRANSFERIR/PAGAMENTO"
+               DISPLAY "L - LEVANTAR"
+               DISPLAY "D - DEPOSITAR"
+               DISPLAY "S - SAIR"
+               DISPLAY "-------------------------------------"
+               DISPLAY "-------------------------------------"
+               DISPLAY "OPERACAO: " WITH NO ADVANCING
+               ACCEPT WS-LOG-TIPO-OP
+           
+               *> Converte para CAPS
+               MOVE FUNCTION UPPER-CASE(WS-LOG-TIPO-OP) 
+               TO WS-LOG-TIPO-OP
+                   EVALUATE WS-LOG-TIPO-OP
+                       WHEN "C"
+                          *> PERFORM 2000-TRANSFERIR
+                       WHEN "T"
+                          *> PERFORM 3000-TRANSFERIR
+                       WHEN "L"
+                          *> PERFORM 4000-LEVANTAR
+                       WHEN "D"
+                          *> PERFORM 5000-DEPOSITAR
+                       WHEN "S"
+                       DISPLAY " "
+                       DISPLAY "-------------------------------------"
+                       DISPLAY "*            * LEAVING *            *"
+                       DISPLAY "-------------------------------------"
+                       DISPLAY "        --   ------------  --        "
+                       DISPLAY "                ------               "
+                       DISPLAY "                  --                 "
+                       DISPLAY " "
+                       WHEN OTHER
+                           DISPLAY "OPCAO INVALIDA!"
+                   END-EVALUATE
+               END-PERFORM
+
            ELSE
                DISPLAY "ERRO: PIN INVALIDO!"
                DISPLAY " "
            END-IF.
 
+           
+           
+           
+           
+           CLOSE FICHEIRO-CLIENTES.
+           STOP RUN.
+           
